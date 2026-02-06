@@ -635,21 +635,21 @@ const ConstituencyMap: React.FC<ConstituencyMapProps> = ({ data }) => {
                         )}
                     </div>
                 </div>
-            </div>
 
-            <MapContainer center={center} zoom={7} scrollWheelZoom={true} className="h-full w-full">
-                <MapController centerCoord={mapCenter} zoomLevel={mapZoom} />
-                <TileLayer
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
-                />
-                <GeoJSON
-                    key={`${viewMode}-${selectedAlliance}-${selectedParty}-${marginRange}-${constituencyType}-${selectedGender}-${selectedDistrict}-${searchTerm}`}
-                    data={geoJsonData}
-                    style={style}
-                    onEachFeature={onEachFeature}
-                />
-            </MapContainer>
+                <MapContainer center={center} zoom={7} scrollWheelZoom={true} className="h-full w-full">
+                    <MapController centerCoord={mapCenter} zoomLevel={mapZoom} />
+                    <TileLayer
+                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                        url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+                    />
+                    <GeoJSON
+                        key={`${viewMode}-${selectedAlliance}-${selectedParty}-${marginRange}-${constituencyType}-${selectedGender}-${selectedDistrict}-${searchTerm}`}
+                        data={geoJsonData}
+                        style={style}
+                        onEachFeature={onEachFeature}
+                    />
+                </MapContainer>
+            </div>
         </div>
     );
 };
