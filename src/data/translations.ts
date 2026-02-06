@@ -1,0 +1,91 @@
+export const tamilTranslations: Record<string, string> = {
+    Constituency_Name: "சட்டமன்ற தொகுதி",
+    District_Name: "மாவட்டம்",
+    Candidate: "வேட்பாளர்",
+    Party: "கட்சி",
+    Votes: "வாக்குகள்",
+    Vote_Share_Percentage: "வாக்கு %",
+    Margin: "வாக்கு வித்தியாசம்",
+    Total_Votes: "மொத்த வாக்குகள்",
+    Winning_Party: "வெற்றி கட்சி",
+    Winning_Candidate: "வெற்றி வேட்பாளர்",
+    Age: "வயது",
+    Gender: "பாலினம்",
+    M: "ஆண்",
+    F: "பெண்",
+    Analysis: "தேர்தல் முடிவுகள் பகுப்பாய்வு 2021",
+    MasterSheet: "முதன்மை தரவு தாள்",
+    Visualizations: "காட்சிப்படுத்தல்",
+    SeatShare: "இடங்கள் பங்கீடு",
+    AllianceShare: "கூட்டணி பங்கீடு",
+    Search: "தேடுக...",
+    Loading: "தரவு ஏற்றப்படுகிறது...",
+    DistrictResults: "மாவட்ட வாரியான முடிவுகள்",
+    VictoryMargin: "வெற்றி வாக்கு வித்தியாசம்",
+    GenderDist: "வெற்றி பெற்றவர்கள் பாலினம்",
+    StrikeRate: "கட்சிகளின் வெற்றி விகிதம் (Strike Rate)",
+    TurnoutVsMargin: "வாக்குப்பதிவு vs வெற்றி வித்தியாசம்",
+    AgeDist: "வெற்றி பெற்றவர்களின் வயது வரம்பு",
+    SeatsWon: "வென்ற இடங்கள்",
+    Contested: "போட்டியிட்ட இடங்கள்",
+    WinRate: "வெற்றி %",
+    Male: "ஆண்",
+    Female: "பெண்",
+    HighMargin: "அதிக வாக்கு வித்தியாசம்",
+    LowMargin: "குறைந்த வாக்கு வித்தியாசம்",
+    ConstituencyType: "தொகுதி வகை",
+    Year: "ஆண்டு",
+    FilterBy: "வடிகட்டு...",
+    Reset: "மீட்டமை",
+    All: "அனைத்தும்",
+    GEN: "பொது (GEN)",
+    SC: "தனி (SC)",
+    ST: "பழங்குடி (ST)",
+    SelectGender: "பாலினம் தேர்வு",
+    SelectMargin: "வாக்கு வித்தியாசம்",
+    SelectVoteShare: "வாக்கு சதவீதம்",
+    VoteShareHigh: "> 50%",
+    MarginMedium: "10,000 - 50,000",
+    MarginLow: "< 10,000",
+    VoteShareHigh: "> 50%",
+    VoteShareMedium: "30% - 50%",
+    VoteShareLow: "< 30%",
+    WinnersOnly: "வெற்றியாளர்கள் மட்டும்",
+    SelectDistrict: "மாவட்டம் தேர்வு",
+    SelectConstituency: "தொகுதி தேர்வு",
+    SelectParty: "கட்சி தேர்வு",
+    SelectPosition: "இடம் தேர்வு",
+    Position1: "வெற்றி (1வது)",
+    Position2: "இரண்டாம் இடம் (2வது)",
+    Position3: "மூன்றாம் இடம் (3வது)",
+    DepositLost: "டெபாசிட் இழந்தவர்கள் (<16.66%)",
+    SelectAlliance: "கூட்டணி தேர்வு",
+    DMKAlliance: "திமுக கூட்டணி",
+    ADMKAlliance: "அதிமுக கூட்டணி",
+    Others: "பிற கட்சிகள்",
+    SelectVoteCount: "வாக்கு எண்ணிக்கை",
+    Votesgt1L: "> 1 லட்சம்",
+    Votes50kto1L: "50,000 - 1 லட்சம்",
+    Votes10kto50k: "10,000 - 50,000",
+    Voteslt10k: "< 10,000"
+};
+
+export const partyColors: Record<string, string> = {
+    "DMK": "#DD1100", // DMK Red
+    "ADMK": "#009900", // ADMK Green
+    "INC": "#00BFFF", // Congress Blue
+    "BJP": "#FF9933", // Saffron
+    "PMK": "#FFFF00", // Yellow
+    "NTK": "#D81C1C", // Red
+    "MNM": "#333333", // Dark Grey
+    "AMMK": "#660033", // Maroon
+    "DMDK": "#DEC20B", // Yellowish
+    "VCK": "#0000FF", // Blue
+    "CPI": "#FF0000",
+    "CPM": "#FF0000",
+    "CPI(M)": "#FF0000",
+    "IUML": "#006600",
+    "KMDK": "#FF0000",
+    "IND": "#808080",
+    "NOTA": "#000000"
+};
