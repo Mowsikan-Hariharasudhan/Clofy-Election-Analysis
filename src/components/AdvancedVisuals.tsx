@@ -6,7 +6,7 @@ import { partyTranslations, educationTranslations, professionTranslations } from
 import {
     BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer,
     ScatterChart, Scatter, PieChart, Pie, Cell,
-    AreaChart, Area, ComposedChart, Line
+    AreaChart, Area
 } from 'recharts';
 
 interface AdvancedVisualsProps {
