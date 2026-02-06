@@ -44,7 +44,7 @@ export const tamilTranslations: Record<string, string> = {
     SelectGender: "பாலினம் தேர்வு",
     SelectMargin: "வாக்கு வித்தியாசம்",
     SelectVoteShare: "வாக்கு சதவீதம்",
-    VoteShareHigh: "> 50%",
+
     MarginMedium: "10,000 - 50,000",
     MarginLow: "< 10,000",
     VoteShareHigh: "> 50%",
@@ -67,7 +67,22 @@ export const tamilTranslations: Record<string, string> = {
     Votesgt1L: "> 1 லட்சம்",
     Votes50kto1L: "50,000 - 1 லட்சம்",
     Votes10kto50k: "10,000 - 50,000",
-    Voteslt10k: "< 10,000"
+    Voteslt10k: "< 10,000",
+    Turnout: "வாக்குப்பதிவு",
+    RunnerUp: "இரண்டாம் இடம்",
+    NoData: "தரவு இல்லை",
+    MarginHigh: "> 50,000",
+    Sex: "பாலினம்",
+    MyNeta_education: "கல்வி தகுதி",
+    TCPD_Prof_Main: "தொழில்",
+    N_Cand: "வேட்பாளர்கள்",
+    Electors: "வாக்காளர்கள்",
+    Turnout_Percentage: "வாக்குப்பதிவு %",
+    Margin_Percentage: "வித்தியாசம் %",
+    No_Terms: "வெற்றிகள்",
+    Deposit_Lost: "டெபாசிட் இழப்பு",
+    Sub_Region: "பகுதி",
+    Position: "இடம்"
 };
 
 export const partyColors: Record<string, string> = {

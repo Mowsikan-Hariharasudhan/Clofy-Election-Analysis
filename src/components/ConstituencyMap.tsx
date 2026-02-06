@@ -123,8 +123,8 @@ const ConstituencyMap: React.FC<ConstituencyMapProps> = ({ data }) => {
 
 
     // Unique Parties & Districts for Dropdown
-    const uniqueParties = useMemo(() => Array.from(new Set(data.map(d => d.Party))).sort(), [data]);
-    const uniqueDistricts = useMemo(() => Array.from(new Set(data.map(d => d.District_Name))).sort(), [data]);
+    const uniqueParties = useMemo(() => Array.from(new Set(data.map(d => d.Party).filter(Boolean))).sort(), [data]);
+    const uniqueDistricts = useMemo(() => Array.from(new Set(data.map(d => d.District_Name).filter(Boolean))).sort(), [data]);
 
     // Filter Logic
     const filteredData = useMemo(() => {
@@ -276,7 +276,6 @@ const ConstituencyMap: React.FC<ConstituencyMapProps> = ({ data }) => {
     };
 
     const handleFeatureClick = (e: any, feature: any) => {
-        const layer = e.target;
         const normalizedAcName = getNormalizedName(feature);
         const dataObj = resultsMap.get(normalizedAcName);
 
@@ -316,13 +315,10 @@ const ConstituencyMap: React.FC<ConstituencyMapProps> = ({ data }) => {
                 </div>
             `, {
                 permanent: false,
+                sticky: true,
                 direction: "top",
-                className: "custom-tooltip bg-white p-2 rounded-lg shadow-xl border border-gray-100 min-w-[180px]"
-            });
-
-            // Add click listener
-            layer.on({
-                click: (e) => handleFeatureClick(e, feature)
+                className: "custom-tooltip bg-white p-2 rounded-lg shadow-xl border border-gray-100 min-w-[180px]",
+                opacity: 1
             });
 
         } else {
@@ -334,7 +330,7 @@ const ConstituencyMap: React.FC<ConstituencyMapProps> = ({ data }) => {
             });
         }
 
-        // Highlight on hover
+        // Consolidated Event Listeners
         layer.on({
             mouseover: (e) => {
                 const layer = e.target;
@@ -344,12 +340,14 @@ const ConstituencyMap: React.FC<ConstituencyMapProps> = ({ data }) => {
                     dashArray: '',
                     fillOpacity: 0.9
                 });
-                layer.bringToFront();
+                layer.openTooltip();
             },
             mouseout: (e) => {
                 const layer = e.target;
                 layer.setStyle(style(feature)); // Reset style
+                layer.closeTooltip();
             },
+            click: (e) => handleFeatureClick(e, feature)
         });
     };
 

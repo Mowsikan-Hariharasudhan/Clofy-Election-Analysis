@@ -47,22 +47,22 @@ const MasterSheet: React.FC<MasterSheetProps> = ({ data }) => {
 
     // Derived Lists for Dropdowns
     // Extract unique values for filters (now using Tamil fields)
-    const districts = useMemo(() => Array.from(new Set(data.map(item => item.District_Name_TA || item.District_Name))).sort(), [data]);
+    const districts = useMemo(() => Array.from(new Set(data.map(item => item.District_Name_TA || item.District_Name))).filter(Boolean).sort(), [data]);
 
     const constituencies = useMemo(() => {
         let filtered = data;
         if (selectedDistrict !== 'All') {
             filtered = filtered.filter(item => (item.District_Name_TA || item.District_Name) === selectedDistrict);
         }
-        return Array.from(new Set(filtered.map(item => item.Constituency_Name_TA || item.Constituency_Name))).sort();
+        return Array.from(new Set(filtered.map(item => item.Constituency_Name_TA || item.Constituency_Name))).filter(Boolean).sort();
     }, [data, selectedDistrict]);
 
-    const parties = useMemo(() => Array.from(new Set(data.map(item => item.Party_TA || item.Party))).sort(), [data]);
+    const parties = useMemo(() => Array.from(new Set(data.map(item => item.Party_TA || item.Party))).filter(Boolean).sort(), [data]);
 
     const educationLevels = useMemo(() => Array.from(new Set(data.map(item => item.MyNeta_education_TA || item.MyNeta_education))).filter(Boolean).sort(), [data]);
 
     // Years
-    const years = useMemo(() => Array.from(new Set(data.map(d => d.Year))).sort(), [data]);
+
 
     const handleSort = (key: SortKey) => {
         let direction: SortDirection = 'asc';
@@ -275,19 +275,18 @@ const MasterSheet: React.FC<MasterSheetProps> = ({ data }) => {
     const columns: SortKey[] = [
 
         'Constituency_Name',
-        'Constituency_Type',
         'District_Name',
         'Candidate',
+        'Party',
+        'Votes',
+        'Vote_Share_Percentage',
         'Sex',
         'Age',
         'MyNeta_education',
         'TCPD_Prof_Main',
-        'Party',
-        'Votes',
         'N_Cand',
         'Electors',
         'Turnout_Percentage',
-        'Vote_Share_Percentage',
         'Margin',
         'Margin_Percentage',
         'Contested',
@@ -641,7 +640,7 @@ const MasterSheet: React.FC<MasterSheetProps> = ({ data }) => {
                                         paddingAngle={5}
                                         dataKey="value"
                                     >
-                                        {statsData.eduData.map((entry, index) => (
+                                        {statsData.eduData.map((_, index) => (
                                             <Cell key={`cell-${index}`} fill={['#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#8884D8'][index % 5]} />
                                         ))}
                                     </Pie>
@@ -692,18 +691,6 @@ const MasterSheet: React.FC<MasterSheetProps> = ({ data }) => {
                                             </div>
                                         </div>
                                     </td>
-                                    <td className="px-6 py-3 text-center">
-                                        <span className={`px-2 py-1 rounded text-xs font-bold ${row.Sex === 'M' ? 'bg-blue-50 text-blue-600' : row.Sex === 'F' ? 'bg-pink-50 text-pink-600' : 'bg-gray-50 text-gray-600'}`}>
-                                            {row.Sex_TA || row.Sex}
-                                        </span>
-                                    </td>
-                                    <td className="px-6 py-3 text-gray-500">{row.Age}</td>
-                                    <td className="px-6 py-3 text-xs text-gray-600 max-w-[150px] truncate" title={row.MyNeta_education_TA || row.MyNeta_education}>
-                                        {row.MyNeta_education_TA || row.MyNeta_education || '-'}
-                                    </td>
-                                    <td className="px-6 py-3 text-xs text-gray-600 max-w-[150px] truncate" title={row.TCPD_Prof_Main_TA || row.TCPD_Prof_Main}>
-                                        {row.TCPD_Prof_Main_TA || row.TCPD_Prof_Main || '-'}
-                                    </td>
                                     <td className="px-6 py-3">
                                         <span
                                             className="px-2 py-1 rounded font-bold text-xs inline-block min-w-[60px] text-center"
@@ -714,41 +701,51 @@ const MasterSheet: React.FC<MasterSheetProps> = ({ data }) => {
                                     </td>
                                     <td className="px-6 py-3 font-mono">
                                         <div className="flex flex-col gap-1">
-                                            <span>{row.Votes?.toLocaleString()}</span>
+                                            <span>{row.Votes?.toLocaleString() || 0}</span>
                                             <div className="w-24 h-1.5 bg-gray-100 rounded-full overflow-hidden">
                                                 <div
                                                     className="h-full bg-blue-500 rounded-full"
-                                                    style={{ width: `${Math.min((row.Votes / 150000) * 100, 100)}%` }} // Max assumed 1.5L for scale
+                                                    style={{ width: `${Math.min(((row.Votes || 0) / 150000) * 100, 100)}%` }} // Max assumed 1.5L for scale
                                                 />
                                             </div>
                                         </div>
                                     </td>
                                     <td className="px-6 py-3 font-mono">
                                         <div className="flex items-center gap-2">
-                                            <span className="w-12 text-right">{row.Vote_Share_Percentage?.toFixed(2)}%</span>
+                                            <span className="w-12 text-right">{row.Vote_Share_Percentage?.toFixed(2) || 0}%</span>
                                             <div className="w-16 h-1.5 bg-gray-100 rounded-full overflow-hidden">
                                                 <div
                                                     className={`h-full rounded-full ${row.Vote_Share_Percentage > 50 ? 'bg-green-500' :
                                                         row.Vote_Share_Percentage > 30 ? 'bg-blue-500' :
                                                             row.Vote_Share_Percentage > 16.66 ? 'bg-yellow-500' : 'bg-red-500'
                                                         }`}
-                                                    style={{ width: `${row.Vote_Share_Percentage}%` }}
+                                                    style={{ width: `${row.Vote_Share_Percentage || 0}%` }}
                                                 />
                                             </div>
                                         </div>
                                     </td>
+                                    <td className="px-6 py-3 text-center">
+                                        <span className={`px-2 py-1 rounded text-xs font-bold ${row.Sex === 'M' ? 'bg-blue-50 text-blue-600' : row.Sex === 'F' ? 'bg-pink-50 text-pink-600' : 'bg-gray-50 text-gray-600'}`}>
+                                            {row.Sex_TA || row.Sex}
+                                        </span>
+                                    </td>
+                                    <td className="px-6 py-3 text-gray-500">{row.Age || '-'}</td>
+                                    <td className="px-6 py-3 text-xs text-gray-600 max-w-[150px] truncate" title={row.MyNeta_education_TA || row.MyNeta_education}>
+                                        {row.MyNeta_education_TA || row.MyNeta_education || '-'}
+                                    </td>
+                                    <td className="px-6 py-3 text-xs text-gray-600 max-w-[150px] truncate" title={row.TCPD_Prof_Main_TA || row.TCPD_Prof_Main}>
+                                        {row.TCPD_Prof_Main_TA || row.TCPD_Prof_Main || '-'}
+                                    </td>
                                     <td className="px-6 py-3 text-center text-gray-600">
-                                        {row.N_Cand}
+                                        {row.N_Cand || '-'}
                                     </td>
                                     <td className="px-6 py-3 font-mono text-gray-500">
-                                        {row.Electors?.toLocaleString()}
+                                        {row.Electors?.toLocaleString() || '-'}
                                     </td>
                                     <td className="px-6 py-3 font-mono text-gray-600 text-center">
                                         {row.Turnout_Percentage ? `${row.Turnout_Percentage}%` : '-'}
                                     </td>
-                                    <td className="px-6 py-3 font-mono text-gray-600 text-center">
-                                        {row.Vote_Share_Percentage?.toFixed(2)}%
-                                    </td>
+
                                     <td className="px-6 py-3 font-mono text-gray-500">
                                         {row.Margin ? (
                                             <div>
@@ -788,14 +785,14 @@ const MasterSheet: React.FC<MasterSheetProps> = ({ data }) => {
                                         )}
                                     </td>
                                     <td className="px-6 py-3 text-xs text-gray-500">
-                                        {row.Sub_Region}
+                                        {row.Sub_Region || '-'}
                                     </td>
                                     <td className="px-6 py-3 font-bold">
                                         <span className={`w-6 h-6 flex items-center justify-center rounded-full ${row.Position === 1 ? 'bg-yellow-100 text-yellow-700' : 'text-gray-500'}`}>
-                                            {row.Position}
+                                            {row.Position || '-'}
                                         </span>
                                     </td>
-                                    <td className="px-6 py-3 text-gray-400">{row.Year}</td>
+                                    <td className="px-6 py-3 text-gray-400">{row.Year || '-'}</td>
                                 </tr>
                             ))
                         ) : (
