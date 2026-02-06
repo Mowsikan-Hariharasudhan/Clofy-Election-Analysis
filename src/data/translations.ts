@@ -13,7 +13,7 @@ export const tamilTranslations: Record<string, string> = {
     Gender: "பாலினம்",
     M: "ஆண்",
     F: "பெண்",
-    Analysis: "தேர்தல் முடிவுகள் பகுப்பாய்வு 2021",
+    Analysis: "Clofy's 2021 தேர்தல் முடிவுகள் பகுப்பாய்வு",
     MasterSheet: "முதன்மை தரவு தாள்",
     Visualizations: "காட்சிப்படுத்தல்",
     SeatShare: "இடங்கள் பங்கீடு",
